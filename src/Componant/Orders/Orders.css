@@ -1,0 +1,17 @@
+.review-item-container{
+    margin:0 auto;
+}
+
+.proceedCheckout{
+    padding:12px 15px;
+    background-color:#FF9900;
+    border:none;
+    font-size:15px;
+    border-radius: 5px;
+    color:white;
+    transition:1.5s;
+}
+.proceedCheckout:hover{
+    background-color:white;
+    color:#FF9900;
+}

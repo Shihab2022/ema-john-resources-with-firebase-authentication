@@ -1,0 +1,12 @@
+.card-detalis{
+
+    position: sticky;
+    top: 0;
+    padding:10px 23px;
+}
+.card-detalis p,h3{
+    margin:25px 0;
+}
+.review-item-details{
+    margin-left:10px;
+}

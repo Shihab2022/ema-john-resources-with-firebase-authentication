@@ -1,0 +1,28 @@
+.shop-container{
+    display:grid;
+    grid-template-columns:4fr 1fr;
+}
+.all-cart-session{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:10px;
+    margin:100px 0 0 100px;
+}
+.cart-Summary{
+    background: #FFE0B3;
+    /* background: #FF9900; */
+
+   
+}
+.clear-btn{
+   margin-bottom:15px;
+   background-color:#FF3030;
+   padding:10px 30px;
+}
+.clear-btn-icon{
+    margin-left:10px;
+}
+.arrow-icon{
+    margin-left:10px;
+    font-size:18px;
+}

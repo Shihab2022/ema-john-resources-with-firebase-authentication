@@ -21,7 +21,7 @@ const Orders = () => {
   return (
     <div className="shop-container">
       <div className="review-item-container">
-        {" "}
+        
         {cart.map((product) => (
           <ReviewItem
             key={product.id}
@@ -34,18 +34,18 @@ const Orders = () => {
         <Card cart={cart}>
           <Link to="/shop">
             <button className="proceedCheckout clear-btn">
-              {" "}
+              
               Clear Cart{" "}
               <FontAwesomeIcon className="clear-btn-icon" icon={faTrashAlt}>
-                {" "}
+                
               </FontAwesomeIcon>
             </button>
           </Link>{" "}
           <br />
-          <Link to="/inventory">
+          <Link to="/shipment">
             <button className="proceedCheckout">
-              {" "}
-              Proceed Checkout{" "}
+              
+              Proceed Shipment{" "}
               <FontAwesomeIcon icon={faCreditCard}> </FontAwesomeIcon>
             </button>
           </Link>{" "}

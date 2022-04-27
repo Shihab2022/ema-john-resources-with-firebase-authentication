@@ -1,26 +1,37 @@
 import { useEffect, useState } from "react";
-import { findDataAtLocalStorage } from "../utilities/fakedb";
+import {  getStoredCart } from "../utilities/fakedb";
 
-const useCards=(products)=>{
-    const [cart,setCart]=useState([])
-    useEffect(() => {
+const useCards=()=>{
+    const [cart, setCart] = useState([]);
+    // https://radiant-reef-45876.herokuapp.com/
 
-       const getData =findDataAtLocalStorage()
-       const savedCart = [];
-       for(const id in getData){
-           const addProduct =products.find(product =>product._id ===id)
-           // console.log(addProduct)
-           if(addProduct){
-               const quantity = getData[id];
-               addProduct.quantity = quantity;
-               savedCart.push(addProduct);
-           }
-
-       }
-      
-       setCart(savedCart);           
-    },[products])
-
-    return [cart,setCart];
+    useEffect( () =>{
+        const storedCart = getStoredCart();
+        const savedCart = [];
+        const keys = Object.keys(storedCart);
+        
+        fetch('https://radiant-reef-45876.herokuapp.com/productByKeys', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(keys)
+        })
+        .then(res => res.json())
+        .then(products =>{
+            for(const id in storedCart){
+            const addedProduct = products.find(product => product._id === id);
+            if(addedProduct){
+                const quantity = storedCart[id];
+                addedProduct.quantity = quantity;
+                savedCart.push(addedProduct);
+            }
+        }
+        setCart(savedCart);
+        })
+        
+    }, []);
+    
+    return [cart, setCart];
 }
 export default useCards;

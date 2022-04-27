@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import Product from "../Product/Product";
 import "./Shop.css";
-import { addToDb, removeFromDb } from "../../utilities/fakedb";
-import useProducts from "../../Hooks/useProducts";
+import { addToDb } from "../../utilities/fakedb";
 import useCards from "../../Hooks/useCarts";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,29 +10,26 @@ import { faArrowRight, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 const Shop = () => {
   // make defoult hook in modile 53-4 and use
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useCards(products);
+  const [cart, setCart] = useCards();
   const [pageCount, setPageCount] = useState(0);
   const [page,setPage]=useState(0)
   const [size,setSize]=useState(15)
 
   useEffect(() => {
-    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
+    fetch(`https://radiant-reef-45876.herokuapp.com/product?page=${page}&size=${size}`)
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, [page,size]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/productCount")
-      .then((res) => res.json())
-      .then((data) => {
+  useEffect( () =>{
+    fetch('https://radiant-reef-45876.herokuapp.com/productCount')
+    .then(res => res.json())
+    .then(data =>{
         const count = data.count;
-        const pages = Math.ceil(count / 15);
+        const pages = Math.ceil(count/10);
         setPageCount(pages);
-      });
-  }, []);
-  const clearAll = () => {
-    setCart([]);
-  };
+    })
+}, [])
 // console.log(page)
   const handleAddToCart = (product) => {
     //   console.log(product)
@@ -57,7 +53,7 @@ const Shop = () => {
       <div className="cart-Summary">
         <Card cart={cart}>
           <Link to="/shop">
-            <button onClick={clearAll} className="proceedCheckout clear-btn">
+            <button  className="proceedCheckout clear-btn">
               Clear Cart
               <FontAwesomeIcon
                 className="clear-btn-icon"

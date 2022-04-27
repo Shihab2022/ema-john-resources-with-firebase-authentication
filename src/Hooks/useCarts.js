@@ -8,7 +8,7 @@ const useCards=(products)=>{
        const getData =findDataAtLocalStorage()
        const savedCart = [];
        for(const id in getData){
-           const addProduct =products.find(product =>product.id ===id)
+           const addProduct =products.find(product =>product._id ===id)
            // console.log(addProduct)
            if(addProduct){
                const quantity = getData[id];

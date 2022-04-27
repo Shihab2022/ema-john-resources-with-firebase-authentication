@@ -10,9 +10,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 const Shop = () => {
   // make defoult hook in modile 53-4 and use
-  const [products] = useProducts();
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useCards(products);
   const [pageCount, setPageCount] = useState(0);
+  const [page,setPage]=useState(0)
+  const [size,setSize]=useState(15)
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/product?page=${page}&size=${size}`)
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, [page,size]);
+
   useEffect(() => {
     fetch("http://localhost:5000/productCount")
       .then((res) => res.json())
@@ -25,7 +34,7 @@ const Shop = () => {
   const clearAll = () => {
     setCart([]);
   };
-
+// console.log(page)
   const handleAddToCart = (product) => {
     //   console.log(product)
     const newCart = [...cart, product];
@@ -70,8 +79,15 @@ const Shop = () => {
       </div>
       <div className='pagination'>
         {[...Array(pageCount).keys()].map((number) => (
-          <button>{number}</button>
+          <button className={page===number ? 'selectClass' : ''} onClick={()=>setPage(number)}>{number}</button>
         ))}
+      
+        <select className='option' onChange={e=>setSize(e.target.value)}>
+            <option value='20'>20 </option>
+            <option value='25'>25 </option>
+            <option value='30'>30 </option>
+            <option value='35'>35 </option>
+        </select>
       </div>
     </div>
   );

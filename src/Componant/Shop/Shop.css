@@ -30,7 +30,7 @@
     margin:20px 100px;
 
 }
-.pagination button{
+.pagination button ,.option{
     margin-left:10px;
     padding:5px 15px;
     background-color:darkkhaki;
@@ -45,4 +45,8 @@
     background-color:whitesmoke;
     color:black;
 
+}
+.pagination .selectClass{
+    background-color:firebrick;
+    color:white;
 }
